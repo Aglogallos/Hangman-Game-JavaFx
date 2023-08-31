@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<GridPane alignment="CENTER" prefHeight="471.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hangmangame.AddDictionary">
+   <columnConstraints>
+      <ColumnConstraints maxWidth="362.0" minWidth="0.0" prefWidth="255.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="538.0" minWidth="10.0" prefWidth="429.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="359.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="205.0" minHeight="10.0" prefHeight="205.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <VBox alignment="CENTER" prefHeight="364.0" prefWidth="504.0" spacing="20.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label text="Current Dictionary :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <VBox prefHeight="64.0" prefWidth="429.0" />
+            <TextField fx:id="input_add_dictionary" alignment="CENTER" prefHeight="0.0" prefWidth="132.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#searchDictionary" text="go" />
+            <Label fx:id="progressLabel">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
+         <children>
+            <Label fx:id="Current_Dictionary_Code" text="Current Dictionary Code">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label  fx:id="bookName" text="Book Name ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+         <children>
+            <Label text="New Dictionary : ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="10.0" layoutY="276.0" prefHeight="200.0" prefWidth="100.0" />
+   </children>
+</GridPane>

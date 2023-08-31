@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
+
+<Stage title="Hangman - OpenLibrary API" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hangmangame.Controller">
+   <scene>
+      <Scene>
+         <root>
+            <BorderPane prefHeight="797.0">
+               <top>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <MenuBar prefHeight="25.0" prefWidth="964.0" style="-fx-font-size: 1.2em;">
+                          <menus>
+                            <Menu mnemonicParsing="false" style="-fx-font-size: 1.2em;" text="Application">
+                              <items>
+                                <MenuItem mnemonicParsing="false" onAction="#start" text="Start" />
+                                    <MenuItem mnemonicParsing="false" onAction="#open_up_load_dictionary" text="Load" />
+                                    <MenuItem mnemonicParsing="false" onAction="#open_up_add_dictionary" text="Create" />
+                                    <MenuItem mnemonicParsing="false" onAction="#exit_app" text="Exit" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Details">
+                              <items>
+                                <MenuItem fx:id="add_dictionary" mnemonicParsing="false" onAction="#open_Dictionary_Details" text="Dictionary" />
+                                    <MenuItem mnemonicParsing="false" onAction="#Rounds" text="Rounds" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem mnemonicParsing="false" onAction="#solution_dialog" text="Solution" />
+                                    <MenuItem mnemonicParsing="false" onAction="#Instructions" text="Instructions" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="964.0">
+                           <children>
+                              <GridPane prefHeight="35.0" prefWidth="827.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="161.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="108.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="129.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="131.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="153.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="149.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="23.0" prefWidth="148.0" text="Available Words :">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="AvailableWordsLabel" prefHeight="27.0" prefWidth="76.0" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Points :" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="TotalPoints" prefHeight="27.0" prefWidth="76.0" text="0" GridPane.columnIndex="3">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Success Rate : " GridPane.columnIndex="4">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="Success_Rate" prefHeight="27.0" prefWidth="76.0" text="\%" GridPane.columnIndex="5">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </top>
+               <left>
+                  <VBox alignment="CENTER" prefHeight="598.0" prefWidth="488.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label>
+                           <graphic>
+                              <ImageView fx:id="ImageView" fitHeight="407.0" fitWidth="225.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@./../../../../../images/start.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <HBox fx:id="word_hbox" alignment="CENTER" prefHeight="219.0" prefWidth="534.0" />
+                     </children>
+                  </VBox>
+               </left>
+               <center>
+                  <VBox alignment="CENTER" prefHeight="80.0" prefWidth="136.0" spacing="20.0" BorderPane.alignment="CENTER">
+                      <padding>
+                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                      </padding>
+                     <children>
+                        <Label fx:id="Dictionary" text="Dictionary">
+                           <font>
+                              <Font name="Javanese Text" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="53.0" prefWidth="348.0" text="Possible Characters Based on other Words :">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="Possible_Letters_Label">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </center>
+               <bottom>
+                  <VBox prefHeight="182.0" prefWidth="964.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="964.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="Q" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="Q">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="W" focusTraversable="false" layoutX="473.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="W">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="E" focusTraversable="false" layoutX="525.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="E">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="R" focusTraversable="false" layoutX="547.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="R">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="T" focusTraversable="false" layoutX="569.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="T">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="Y" focusTraversable="false" layoutX="591.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="Y">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="U" focusTraversable="false" layoutX="613.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="U">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="I" focusTraversable="false" layoutX="635.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="I">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="O" focusTraversable="false" layoutX="657.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="O">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="P" focusTraversable="false" layoutX="654.0" layoutY="18.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="P">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="A" focusTraversable="false" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="A">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="S" focusTraversable="false" layoutX="474.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="S">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="D" focusTraversable="false" layoutX="497.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="D">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="F" focusTraversable="false" layoutX="520.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="F">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="G" focusTraversable="false" layoutX="543.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="G">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="H" focusTraversable="false" layoutX="566.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="H">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="J" focusTraversable="false" layoutX="589.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="J">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="K" focusTraversable="false" layoutX="612.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="K">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="L" focusTraversable="false" layoutX="635.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="L">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="Z" focusTraversable="false" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="Z">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="X" focusTraversable="false" layoutX="475.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="X">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="C" focusTraversable="false" layoutX="492.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="C">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="V" focusTraversable="false" layoutX="510.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="V">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="B" focusTraversable="false" layoutX="527.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="B">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="N" focusTraversable="false" layoutX="545.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="N">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="M" focusTraversable="false" layoutX="562.0" layoutY="23.0" mnemonicParsing="false" onAction="#Try_this_Letter" prefWidth="60.0" text="M">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </bottom>
+            </BorderPane>
+         </root>
+      </Scene>
+   </scene>
+</Stage>
